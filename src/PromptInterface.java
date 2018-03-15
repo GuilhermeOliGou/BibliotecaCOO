@@ -1,3 +1,4 @@
+import Itens.Livro;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
@@ -154,13 +155,13 @@ public class PromptInterface {
     
     public void PrintaLivro(Livro l){
         PedeTitulo();
-        System.out.println(l.titulo);
+        System.out.println(l.GetTitulo());
         QuebraLinha();
         PedeAutor();
-        System.out.println(l.autor);
+        System.out.println(l.GetAutor());
         QuebraLinha();
         PedeCodigo();
-        System.out.println(l.codigo);
+        System.out.println(l.GetCodigo());
         QuebraLinha();
     }
     

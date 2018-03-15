@@ -1,3 +1,6 @@
+
+import Itens.Livro;
+
 public class BancoDeDados {
     
     public int maxUsuarios = 30;
@@ -34,7 +37,7 @@ public class BancoDeDados {
     
     private boolean CodigoDeLivroExistente (int x){
         for(int i = 0; i < proximoIndiceLivreParaLivro; i++){
-            if (livros[i].codigo == x)
+            if (livros[i].GetCodigo() == x)
                 return true;
         }
         return false;
@@ -103,7 +106,7 @@ public class BancoDeDados {
     
     private int PosicaoLivro (int codigo){
         for (int i = 0; i < proximoIndiceLivreParaLivro; i++)
-            if (livros[i].codigo == codigo)
+            if (livros[i].GetCodigo() == codigo)
                 return i;
         return -1;
     }
