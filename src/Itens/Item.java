@@ -2,7 +2,7 @@ package Itens;
 
 public class Item {
     protected String titulo;
-    protected int codigo;
+    protected static int codigo = 1;
     protected int ano;
     protected int quantidadeDeExemplares;
     
@@ -10,11 +10,11 @@ public class Item {
         super();
     }
     
-    public Item (String Titulo, int Ano, int Codigo, int QuantidadeDeExemplares){
+    public Item (String Titulo, int Ano, int QuantidadeDeExemplares){
         super();
         SetTitulo(Titulo);
         SetAno(Ano);
-        SetCodigo(Codigo);
+        SetCodigo();
         SetQuantidadeDeExemplares(QuantidadeDeExemplares);
     }
     
@@ -22,7 +22,7 @@ public class Item {
         return titulo;
     }
     
-    public void SetTitulo (String x){
+    public final void SetTitulo (String x){
         titulo = x;
     }
     
@@ -30,15 +30,15 @@ public class Item {
         return codigo;
     }
     
-    public void SetCodigo (int x){
-        codigo = x;
+    public final void SetCodigo (){
+        codigo = codigo++;
     }
     
     public int GetAno (){
         return ano;
     }
     
-    public void SetAno (int x){
+    public final void SetAno (int x){
         ano = x;
     }
         
@@ -46,7 +46,7 @@ public class Item {
         return quantidadeDeExemplares;
     }
     
-    public void SetQuantidadeDeExemplares (int x){
+    public final void SetQuantidadeDeExemplares (int x){
         quantidadeDeExemplares += x;
     }
 }

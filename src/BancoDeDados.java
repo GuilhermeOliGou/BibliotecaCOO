@@ -1,14 +1,14 @@
-
 import Itens.Livro;
+import java.util.LinkedList;
 
 public class BancoDeDados {
     
-    public int maxUsuarios = 30;
-    public int maxLivros = 90;
+    private int maxUsuarios = 30;
+    private int maxItens = 90;
     public Usuario[] usuarios = new Usuario[maxUsuarios];
-    public Livro[] livros = new Livro[maxLivros];
+    public Livro[] livros = new Livro[maxItens];
     private int proximoIndiceLivreParaUsuario = 0;
-    private int proximoIndiceLivreParaLivro = 0;
+    private int proximoIndiceLivreParaIten = 0;
     private PromptInterface in;
     
     public BancoDeDados (PromptInterface In){
@@ -23,20 +23,20 @@ public class BancoDeDados {
         return x == maxUsuarios;
     }
     
-    private boolean LivrosCheios (int x){
-        return x == maxLivros;
+    private boolean ItensCheios (int x){
+        return x == maxItens;
     }
     
     private boolean CodigoDeUsuarioExistente (int x){
         for(int i = 0; i < proximoIndiceLivreParaUsuario; i++){
-            if (usuarios[i].codigo == x)
+            if (usuarios[i].GetCodigo() == x)
                 return true;
         }
         return false;
     }
     
     private boolean CodigoDeLivroExistente (int x){
-        for(int i = 0; i < proximoIndiceLivreParaLivro; i++){
+        for(int i = 0; i < proximoIndiceLivreParaIten; i++){
             if (livros[i].GetCodigo() == x)
                 return true;
         }
@@ -48,10 +48,17 @@ public class BancoDeDados {
     //+++++Valores+++++//
     
     private int CadastraNumero (int operacao){
-        if (operacao < 3)
-            in.PedeCodigo();
-        else
-            in.PedeQuantidade();
+        switch (operacao){
+            case 1:
+                in.PedeCodigo();
+                break;
+            case 2:
+                in.PedeCodigo();
+                break;
+            case 3:
+                in.PedeQuantidade();
+                break;
+        }
         in.QuebraLinha();
         int numero;
         do{
@@ -99,13 +106,13 @@ public class BancoDeDados {
     
     private int PosicaoUsuario (int codigo){
         for (int i = 0; i < proximoIndiceLivreParaUsuario; i++)
-            if (usuarios[i].codigo == codigo)
+            if (usuarios[i].GetCodigo() == codigo)
                 return i;
         return -1;
     }
     
     private int PosicaoLivro (int codigo){
-        for (int i = 0; i < proximoIndiceLivreParaLivro; i++)
+        for (int i = 0; i < proximoIndiceLivreParaIten; i++)
             if (livros[i].GetCodigo() == codigo)
                 return i;
         return -1;
@@ -124,13 +131,13 @@ public class BancoDeDados {
         }
         String nome = CadastraPalavra(1);
         int codigo = CadastraNumero(1);
-        usuarios[proximoIndiceLivreParaUsuario] = new Usuario (nome,codigo,0);
+        usuarios[proximoIndiceLivreParaUsuario] = new Usuario (nome);
         proximoIndiceLivreParaUsuario++;
         in.CadastroDeUsuarioBemSucedido();
     }
     
-    public void CadastraLivro (){
-        if (!LivrosCheios(proximoIndiceLivreParaLivro)) {
+    public void CadastraItem (){
+        if (!ItensCheios(proximoIndiceLivreParaIten)) {
             in.LivrosCheios();
             return;
         }
@@ -139,7 +146,7 @@ public class BancoDeDados {
         int codigo = CadastraNumero(2);
         int quantidade = CadastraNumero(3);
         livros[proximoIndiceLivreParaLivro] = new Livro (titulo, autor, codigo, quantidade);
-        proximoIndiceLivreParaLivro++;
+        proximoIndiceLivreParaIten++;
         in.CadastroDeLivroBemSucedido();
     }
     
@@ -152,12 +159,12 @@ public class BancoDeDados {
             in.PrintaUsuario(usuarios[i]);
     }
     
-    public void ListaLivros(){
-        if (proximoIndiceLivreParaLivro == 0){
+    public void ListaItens(){
+        if (proximoIndiceLivreParaIten == 0){
             in.SemLivros();
             return;
         }
-        for (int i = 0; i < proximoIndiceLivreParaLivro; i++)
+        for (int i = 0; i < proximoIndiceLivreParaIten; i++)
             in.PrintaLivro(livros[i]);
     }
     
@@ -184,6 +191,14 @@ public class BancoDeDados {
     public boolean ExemplaresDisponiveis (int posicao){
         return livros[posicao].GetQuantidadeDeExemplares() != 0;
     }
+    
+    public int GetMaxUsuarios (){
+        return maxUsuarios;
+    }  
+    
+    public int GetMaxItens (){
+        return maxItens;
+    }   
     
     //-----  -----  -----//
     

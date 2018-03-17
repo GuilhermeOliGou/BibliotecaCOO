@@ -146,10 +146,10 @@ public class PromptInterface {
     
     public void PrintaUsuario(Usuario u){
         PedeNome();
-        System.out.println(u.nome);
+        System.out.println(u.GetNome());
         QuebraLinha();
         PedeCodigo();
-        System.out.println(u.codigo);
+        System.out.println(u.GetCodigo());
         QuebraLinha();
     }
     

@@ -19,7 +19,7 @@ public class Biblioteca {
                 banco.CadastraUsuario();
                 break;
             case 2: 
-                banco.CadastraLivro();
+                banco.CadastraItem();
                 break;
 
             case 3:
@@ -35,7 +35,7 @@ public class Biblioteca {
                 break;
 
             case 6:
-                banco.ListaLivros();
+                banco.ListaItens();
                 break;
 
             case 7:

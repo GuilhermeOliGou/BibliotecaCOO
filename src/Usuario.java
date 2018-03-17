@@ -1,12 +1,34 @@
 public class Usuario {
     
-    public String nome;
-    public int codigo;
-    public int emprestimos;
+    private String nome;
+    private static int codigo = 1;
+    private int emprestimos = 0;
     
-    Usuario (String Nome, int Codigo, int Emprestimos){
-        this.nome = Nome;
-        this.codigo = Codigo;
-        this.emprestimos = Emprestimos;
+    Usuario (String Nome){
+        SetNome(Nome);
     }
+    
+    public String GetNome (){
+        return nome;
+    }
+    
+    public final void SetNome (String x){
+        nome = x;
+    }       
+    
+    public int GetEmprestimos (){
+        return emprestimos;
+    }
+    
+    public final void SetEmpresetimos (int x){
+        emprestimos += x;
+    }     
+    
+    public int GetCodigo (){
+        return codigo;
+    }
+    
+    public final void SetCodigo (){
+        codigo = codigo++;
+    }     
 }

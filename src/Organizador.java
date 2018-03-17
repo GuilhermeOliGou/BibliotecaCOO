@@ -7,14 +7,14 @@ public class Organizador {
     
     public Organizador(BancoDeDados Banco, PromptInterface In){
         this.banco = Banco;
-        matrizDeEmprestimos = new boolean[banco.maxUsuarios][banco.maxLivros];
+        matrizDeEmprestimos = new boolean[banco.GetMaxUsuarios()][banco.GetMaxItens()];
         this.in = In;
     }
     
     //-----Funções Auxiliares-----//
     
     private boolean TestaEmprestimos(int usuario){
-        return banco.usuarios[usuario].emprestimos >= maxEmprestimos;
+        return banco.usuarios[usuario].GetEmprestimos() >= maxEmprestimos;
     }
     
     //-----  -----  -----//
@@ -45,7 +45,7 @@ public class Organizador {
             return;
         }
         matrizDeEmprestimos[usuario][livro] = true;
-        banco.usuarios[usuario].emprestimos++;
+        banco.usuarios[usuario].SetEmpresetimos(1);
         banco.livros[livro].SetQuantidadeDeExemplares(-1);
     }
     
@@ -65,14 +65,14 @@ public class Organizador {
             return;
         }
         matrizDeEmprestimos[usuario][livro] = false;
-        banco.usuarios[usuario].emprestimos--;
+        banco.usuarios[usuario].SetEmpresetimos(-1);
         banco.livros[livro].SetQuantidadeDeExemplares(1);
     }
     
     public void MostraEmprestimosDoUsuario(){
         int usuario = banco.Acha(1);
         boolean emprestimos = false;
-        for (int i = 0; i < banco.maxLivros; i++)
+        for (int i = 0; i < banco.GetMaxItens(); i++)
             if (matrizDeEmprestimos[usuario][i]){
                 in.PrintaLivro(banco.livros[i]);
                 emprestimos = true;
