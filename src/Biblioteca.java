@@ -15,7 +15,7 @@ public class Biblioteca {
             comando = in.retornaNumero();
 
             switch (comando) {
-            case 1:
+            case 1://Feito
                 banco.CadastraUsuario();
                 break;
             case 2: 
@@ -23,11 +23,11 @@ public class Biblioteca {
                 break;
 
             case 3:
-                org.EmprestaLivro();
+                org.EmprestaItem();
                 break;
 
             case 4:
-                org.DevolveLivro();
+                org.DevolveItem();
                 break;
 
             case 5:

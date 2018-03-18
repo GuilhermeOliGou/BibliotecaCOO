@@ -4,7 +4,7 @@ public class Item {
     protected String titulo;
     protected static int codigo = 1;
     protected int ano;
-    protected int quantidadeDeExemplares;
+    protected int quantidadeDeExemplares = 0;
     
     public Item (){
         super();

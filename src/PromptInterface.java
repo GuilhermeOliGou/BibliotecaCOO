@@ -44,9 +44,21 @@ public class PromptInterface {
         sc.close();
     }
     
+    public void MostraOpçõesDeEmprestimo (){
+        System.out.println("Escolha o tipo de item:");
+        System.out.println("1 - Livro");
+        System.out.println("2 - CD");
+        System.out.println("3 - DVD");
+        System.out.println("4 - Catálogo Geral");
+    }
+    
     //+++++  +++++  +++++//
     
     //+++++Avisos+++++//
+    
+    public void TipoDeItemInexistente (){
+        System.out.println("Operação inválida!! Tipo de Item inexistente!!");
+    }
     
     public void OperacaoInvalida (){
         System.out.println("Operação inválida!! Digite números de 1 a 8!!");
@@ -56,8 +68,17 @@ public class PromptInterface {
         System.out.println("Não cabe mais nenhum Usuário!");
     }
     
-    public void LivrosCheios (){
-        System.out.println("Não cabe mais nenhum Livro!");
+    public void ItensCheios (int item){
+        switch(item){
+            case 1:
+                System.out.println("Não cabe mais nenhum Livro!");
+            case 2:
+                System.out.println("Não cabe mais nenhum CD!");
+            case 3:
+                System.out.println("Não cabe mais nenhum DVD!");
+            default:
+                TipoDeItemInexistente();
+        }        
     }
     
     public void CodigoExistente(){
@@ -128,16 +149,20 @@ public class PromptInterface {
         System.out.print("Código: ");
     }
     
-    public void QuebraLinha (){
-        System.out.println();
-    }
-    
     public void PedeCodigo2 (){
         System.out.println("Código Usuário: ");
     }
     
     public void PedeCodigo3 (){
         System.out.println("Código Livro: ");
+    }
+    
+    public void QuebraLinha (){
+        System.out.println();
+    }
+    
+    public void PedeAno (){
+        System.out.println("Digite o ano de criação do Item:");
     }
     
     //+++++  +++++  +++++//
@@ -173,8 +198,8 @@ public class PromptInterface {
         System.out.println("Usuário cadstrado com sucesso!");
     }
     
-    public void CadastroDeLivroBemSucedido (){
-        System.out.println("Livro cadstrado com sucesso!");
+    public void CadastroDeItemBemSucedido (){
+        System.out.println("Item cadstrado com sucesso!");
     }
     
     //+++++  +++++  +++++//

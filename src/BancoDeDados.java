@@ -1,18 +1,31 @@
+import Itens.CD;
+import Itens.DVD;
 import Itens.Livro;
 import java.util.LinkedList;
 
 public class BancoDeDados {
     
-    private int maxUsuarios = 30;
-    private int maxItens = 90;
-    public Usuario[] usuarios = new Usuario[maxUsuarios];
-    public Livro[] livros = new Livro[maxItens];
-    private int proximoIndiceLivreParaUsuario = 0;
-    private int proximoIndiceLivreParaIten = 0;
+    private int maxUsuarios;
+    private int maxLivros;
+    private int maxCDs;
+    private int maxDVDs;
+    private int quantidadeDeUsuarios = 0;
+    private int quantidadeDeLivros = 0;
+    private int quantidadeDeCDs = 0;
+    private int quantidadeDeDVDs = 0;
+    private LinkedList<Usuario> usuarios;
+    private LinkedList<Livro> livros;
+    private LinkedList<CD> CDs;
+    private LinkedList<DVD> DVDs;
+    private LinkedList<Emprestimo> emprestimos;
     private PromptInterface in;
     
     public BancoDeDados (PromptInterface In){
-        this.in = In;
+        SetIn(In);
+        SetMaxUsuarios(60);
+        SetMaxLivros(200);
+        SetMaxCDs(100);
+        SetMaxDVDs(100);
     }
     
     //-----Funções de Auxílio-----//
@@ -23,13 +36,22 @@ public class BancoDeDados {
         return x == maxUsuarios;
     }
     
-    private boolean ItensCheios (int x){
-        return x == maxItens;
+    private boolean ItensCheios (int operacao){
+        switch(operacao){
+            case 1:
+                return quantidadeDeLivros >= maxLivros;
+            case 2:
+                return quantidadeDeCDs >= maxCDs;
+            case 3:
+                return quantidadeDeDVDs >= maxDVDs;
+            default:
+                return false;
+        }        
     }
     
-    private boolean CodigoDeUsuarioExistente (int x){
-        for(int i = 0; i < proximoIndiceLivreParaUsuario; i++){
-            if (usuarios[i].GetCodigo() == x)
+    /*private boolean CodigoDeUsuarioExistente (int x){
+        for(int i = 0; i < quantidadeDeUsuarios; i++){
+            if (usuarios.get(i).GetCodigo() == x)
                 return true;
         }
         return false;
@@ -37,11 +59,11 @@ public class BancoDeDados {
     
     private boolean CodigoDeLivroExistente (int x){
         for(int i = 0; i < proximoIndiceLivreParaIten; i++){
-            if (livros[i].GetCodigo() == x)
+            if (livros.get(i).GetCodigo() == x)
                 return true;
         }
         return false;
-    }
+    }*/
     
     //+++++  +++++  +++++//
     
@@ -50,13 +72,13 @@ public class BancoDeDados {
     private int CadastraNumero (int operacao){
         switch (operacao){
             case 1:
-                in.PedeCodigo();
+                in.MostraOpçõesDeEmprestimo();
                 break;
             case 2:
-                in.PedeCodigo();
+                in.PedeQuantidade();
                 break;
             case 3:
-                in.PedeQuantidade();
+                in.PedeAno();
                 break;
         }
         in.QuebraLinha();
@@ -65,25 +87,15 @@ public class BancoDeDados {
             numero = in.retornaNumero();
             switch (operacao){
                 case 1:
-                    if (!CodigoDeUsuarioExistente(numero))
-                        return numero;
-                    else{
-                        in.CodigoExistente();
-                        break;
-                    }
+                    return numero;
                 case 2:
-                    if (!CodigoDeLivroExistente(numero))
-                        return numero;
-                    else{
-                        in.CodigoExistente();
-                        break;
-                    }
-                case 3:
                     if (numero <= 0 || numero > 15){
                         in.QuantidadeDeLivrosInvalida();
                         break;
                     }else
                         return numero;
+                case 3:
+                    return numero;
             }
         }while (true);
     }
@@ -105,17 +117,28 @@ public class BancoDeDados {
     }
     
     private int PosicaoUsuario (int codigo){
-        for (int i = 0; i < proximoIndiceLivreParaUsuario; i++)
-            if (usuarios[i].GetCodigo() == codigo)
+        for (int i = 0; i < quantidadeDeUsuarios; i++)
+            if (usuarios.get(i).GetCodigo() == codigo)
                 return i;
         return -1;
     }
     
     private int PosicaoLivro (int codigo){
         for (int i = 0; i < proximoIndiceLivreParaIten; i++)
-            if (livros[i].GetCodigo() == codigo)
+            if (livros.get(i).GetCodigo() == codigo)
                 return i;
         return -1;
+    }
+    
+    private LinkedList<String> CadastraGrupoDePalavras (int operacao){
+        LinkedList<String> grupoDePalavras;
+        do {
+            switch(operacao){
+                case 1:
+                    
+            }
+        }while(true);
+        return grupoDePalavras;
     }
     
     //+++++  +++++  +++++//
@@ -125,38 +148,48 @@ public class BancoDeDados {
     //-----Funções Principais-----//
     
     public void CadastraUsuario(){
-        if (UsuariosCheios(proximoIndiceLivreParaUsuario)) {
+        if (UsuariosCheios(quantidadeDeUsuarios)) {
             in.UsuariosCheios();
             return;
         }
         String nome = CadastraPalavra(1);
-        int codigo = CadastraNumero(1);
-        usuarios[proximoIndiceLivreParaUsuario] = new Usuario (nome);
-        proximoIndiceLivreParaUsuario++;
+        Usuario usuario = new Usuario (nome);
+        usuarios.addLast(usuario);
+        quantidadeDeUsuarios++;
         in.CadastroDeUsuarioBemSucedido();
     }
     
     public void CadastraItem (){
-        if (!ItensCheios(proximoIndiceLivreParaIten)) {
-            in.LivrosCheios();
+        int operacao = CadastraNumero(1);
+        if (!ItensCheios(operacao)) {
+            in.ItensCheios(operacao);
             return;
         }
         String titulo = CadastraPalavra(2);
-        String autor = CadastraPalavra(3);
-        int codigo = CadastraNumero(2);
-        int quantidade = CadastraNumero(3);
-        livros[proximoIndiceLivreParaLivro] = new Livro (titulo, autor, codigo, quantidade);
-        proximoIndiceLivreParaIten++;
-        in.CadastroDeLivroBemSucedido();
+        int ano = CadastraNumero(3);
+        int quantidade = CadastraNumero(2);
+        switch (operacao){
+            case 1:
+                LinkedList<String> autores = CadastraGrupoDePalavras(operacao);
+                quantidadeDeLivros += quantidade;
+                break;
+            case 2:
+                quantidadeDeCDs += quantidade;
+                break;
+            case 3:
+                quantidadeDeDVDs += quantidade;
+                break;
+        }
+        in.CadastroDeItemBemSucedido();
     }
     
     public void ListaUsuarios(){
-        if (proximoIndiceLivreParaUsuario == 0){
+        if (quantidadeDeUsuarios == 0){
             in.SemUsuarios();
             return;
         }
-        for (int i = 0; i < proximoIndiceLivreParaUsuario; i++)
-            in.PrintaUsuario(usuarios[i]);
+        for (int i = 0; i < quantidadeDeUsuarios; i++)
+            in.PrintaUsuario(usuarios.get(i));
     }
     
     public void ListaItens(){
@@ -165,7 +198,7 @@ public class BancoDeDados {
             return;
         }
         for (int i = 0; i < proximoIndiceLivreParaIten; i++)
-            in.PrintaLivro(livros[i]);
+            in.PrintaLivro(livros.get(i));
     }
     
     //-----  -----  -----//
@@ -189,16 +222,48 @@ public class BancoDeDados {
     }
     
     public boolean ExemplaresDisponiveis (int posicao){
-        return livros[posicao].GetQuantidadeDeExemplares() != 0;
+        return livros.get(posicao).GetQuantidadeDeExemplares() != 0;
     }
     
     public int GetMaxUsuarios (){
         return maxUsuarios;
     }  
     
-    public int GetMaxItens (){
-        return maxItens;
-    }   
+    public final void SetMaxUsuarios (int x){
+        maxUsuarios = x;
+    }
+    
+    public int GetMaxLivros (){
+        return maxLivros;
+    }  
+    
+    public final void SetMaxLivros (int x){
+        maxLivros = x;
+    }
+    
+    public int GetMaxCDs (){
+        return maxCDs;
+    }  
+    
+    public final void SetMaxCDs (int x){
+        maxCDs = x;
+    }
+    
+    public int GetMaxDVDs (){
+        return maxDVDs;
+    }  
+    
+    public final void SetMaxDVDs (int x){
+        maxDVDs = x;
+    }
+    
+    public PromptInterface GetIn (){
+        return in;
+    }
+    
+    public final void SetIn (PromptInterface x){
+        this.in = x;
+    }  
     
     //-----  -----  -----//
     

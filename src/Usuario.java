@@ -1,11 +1,14 @@
+import java.util.LinkedList;
 public class Usuario {
     
     private String nome;
     private static int codigo = 1;
-    private int emprestimos = 0;
+    private int emprestimosAtuais = 0;
+    private LinkedList<Emprestimo> emprestimos;
     
     Usuario (String Nome){
         SetNome(Nome);
+        SetCodigo();
     }
     
     public String GetNome (){
@@ -16,12 +19,12 @@ public class Usuario {
         nome = x;
     }       
     
-    public int GetEmprestimos (){
-        return emprestimos;
+    public int GetEmprestimosAtuais (){
+        return emprestimosAtuais;
     }
     
-    public final void SetEmpresetimos (int x){
-        emprestimos += x;
+    public final void SetEmprestimosAtuais (int x){
+        emprestimosAtuais += x;
     }     
     
     public int GetCodigo (){
@@ -30,5 +33,13 @@ public class Usuario {
     
     public final void SetCodigo (){
         codigo = codigo++;
-    }     
+    }  
+    
+    public LinkedList<Emprestimo> GetEmprestimo (){
+        return emprestimos;
+    }
+    
+    public final void SetEmprestimo (LinkedList<Emprestimo> x){
+        emprestimos = x;
+    }
 }

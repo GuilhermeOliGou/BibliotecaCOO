@@ -10,7 +10,7 @@ public class Livro extends Item{
     private String editora;
     private int numEdicao;
     
-    public Livro(String Titulo, int Ano, int Codigo, int QuantidadeDeExemplares, LinkedList<String> Autores, LinkedList<Genero> Generos, String Editora, int NumEdicao){
+    public Livro(String Titulo, int Ano, int QuantidadeDeExemplares, LinkedList<String> Autores, LinkedList<Genero> Generos, String Editora, int NumEdicao){
         super(Titulo, Ano, QuantidadeDeExemplares);
         SetAutor(Autores);
         SetGeneros(Generos);
