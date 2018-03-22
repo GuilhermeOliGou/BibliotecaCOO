@@ -1,3 +1,5 @@
+package DB;
+
 import java.util.LinkedList;
 public class Usuario {
     
@@ -6,7 +8,7 @@ public class Usuario {
     private int emprestimosAtuais = 0;
     private LinkedList<Emprestimo> emprestimos;
     
-    Usuario (String Nome){
+    public Usuario (String Nome){
         SetNome(Nome);
         SetCodigo();
     }

@@ -1,6 +1,8 @@
-import Itens.CD;
-import Itens.DVD;
-import Itens.Livro;
+import DB.Emprestimo;
+import DB.Usuario;
+import DB.CD;
+import DB.DVD;
+import DB.Livro;
 import java.util.LinkedList;
 
 public class BancoDeDados {
@@ -264,6 +266,22 @@ public class BancoDeDados {
     public final void SetIn (PromptInterface x){
         this.in = x;
     }  
+    
+    public Usuario GetUsuario (int x){
+        return usuarios.get(x);
+    }  
+    
+    public Livro GetLivro (int x){
+        return livros.get(x);
+    }  
+    
+    public CD GetCD (int x){
+        return CDs.get(x);
+    }  
+    
+    public DVD GetDVD (int x){
+        return DVDs.get(x);
+    }
     
     //-----  -----  -----//
     

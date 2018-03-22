@@ -13,7 +13,7 @@ public class Organizador {
     //-----Funções Auxiliares-----//
     
     private boolean TestaEmprestimos(int usuario){
-        return banco.usuarios.get(usuario).GetEmprestimosAtuais() >= maxEmprestimos;
+        return banco.GetUsuario(usuario).GetEmprestimosAtuais() >= maxEmprestimos;
     }
     
     //-----  -----  -----//
@@ -44,8 +44,8 @@ public class Organizador {
             return;
         }
         matrizDeEmprestimos[usuario][livro] = true;
-        banco.usuarios.get(usuario).SetEmprestimosAtuais(1);
-        banco.livros.get(livro).SetQuantidadeDeExemplares(-1);
+        banco.GetUsuario(usuario).SetEmprestimosAtuais(1);
+        banco.GetLivro(livro).SetQuantidadeDeExemplares(-1);
     }
     
     public void DevolveItem(){
@@ -64,8 +64,8 @@ public class Organizador {
             return;
         }
         matrizDeEmprestimos[usuario][livro] = false;
-        banco.usuarios.get(usuario).SetEmprestimosAtuais(-1);
-        banco.livros.get(livro).SetQuantidadeDeExemplares(1);
+        banco.GetUsuario(usuario).SetEmprestimosAtuais(-1);
+        banco.GetLivro(livro).SetQuantidadeDeExemplares(1);
     }
     
     public void MostraEmprestimosDoUsuario(){
@@ -73,7 +73,7 @@ public class Organizador {
         boolean emprestimos = false;
         for (int i = 0; i < banco.GetMaxItens(); i++)
             if (matrizDeEmprestimos[usuario][i]){
-                in.PrintaLivro(banco.livros.get(i));
+                in.PrintaLivro(banco.GetLivro(i));
                 emprestimos = true;
             }
         if (!emprestimos)

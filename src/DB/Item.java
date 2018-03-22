@@ -1,4 +1,4 @@
-package Itens;
+package DB;
 
 public class Item {
     protected String titulo;
