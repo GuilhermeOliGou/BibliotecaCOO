@@ -1,7 +1,7 @@
 package DB;
 
 import DB.Usuario;
-import DB.Item;
+import DB.Itens.Item;
 
 public class Emprestimo {
     

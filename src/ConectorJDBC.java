@@ -32,7 +32,7 @@ public abstract class ConectorJDBC {
 
 	protected ConectorJDBC(DB db) {
 		this.db = db;
-		String   = this.db == DB.MYSQL ? MYSQL_DRIVER : POSTGRES_DRIVER;
+		String  dbDriver = this.db == DB.MYSQL ? MYSQL_DRIVER : POSTGRES_DRIVER;
 
 		try {
 			Class.forName(dbDriver);
