@@ -1,4 +1,4 @@
-
+﻿
 abrir o psql
 digitar usuário (postgres) e senha (eachusp-si)
 create database coo2018;
