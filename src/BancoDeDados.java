@@ -1,8 +1,8 @@
 import DB.Emprestimo;
 import DB.Usuario;
-import DB.CD;
-import DB.DVD;
-import DB.Livro;
+import DB.Itens.CD;
+import DB.Itens.DVD;
+import DB.Itens.Livro;
 import java.util.LinkedList;
 
 public class BancoDeDados {
