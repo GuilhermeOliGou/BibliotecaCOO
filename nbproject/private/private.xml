@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/casa/Documents/NetBeansProjects/BibliotecaCOO/src/DB/Itens/CD.java</file>
             <file>file:/C:/Users/casa/Documents/NetBeansProjects/BibliotecaCOO/src/BancoDeDados.java</file>
+            <file>file:/C:/Users/casa/Documents/NetBeansProjects/BibliotecaCOO/src/ConectorJDBC.java</file>
+            <file>file:/C:/Users/casa/Documents/NetBeansProjects/BibliotecaCOO/src/como%20usar%20o%20postgres.txt</file>
+            <file>file:/C:/Users/casa/Documents/NetBeansProjects/BibliotecaCOO/src/Biblioteca.java</file>
+            <file>file:/C:/Users/casa/Documents/NetBeansProjects/BibliotecaCOO/src/GerenciadorBaseDados.txt</file>
         </group>
     </open-files>
 </project-private>

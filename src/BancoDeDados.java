@@ -5,7 +5,7 @@ import DB.Itens.DVD;
 import DB.Itens.Livro;
 import java.util.LinkedList;
 
-public class BancoDeDados {
+public class BancoDeDados extends ConectorJDBC{
     
     private int maxUsuarios;
     private int maxLivros;
@@ -22,7 +22,33 @@ public class BancoDeDados {
     private LinkedList<Emprestimo> emprestimos;
     private PromptInterface in;
     
+    private final String dbHost = "localHost";
+    private final String dbName = "coo2018";
+    private final String user = "root";
+    private final String password = "";
+    
+    @Override
+    protected String getDbHost(){
+        return dbHost;
+    }
+    
+    @Override
+    protected String getDbName(){
+        return dbName;
+    }
+    
+    @Override
+    protected String getUser(){
+        return user;
+    }
+    
+    @Override
+    protected String getPassword(){
+        return password;
+    }
+    
     public BancoDeDados (PromptInterface In){
+        super(DB.POSTGRES);
         SetIn(In);
         SetMaxUsuarios(60);
         SetMaxLivros(200);
@@ -50,22 +76,6 @@ public class BancoDeDados {
                 return false;
         }        
     }
-    
-    /*private boolean CodigoDeUsuarioExistente (int x){
-        for(int i = 0; i < quantidadeDeUsuarios; i++){
-            if (usuarios.get(i).GetCodigo() == x)
-                return true;
-        }
-        return false;
-    }
-    
-    private boolean CodigoDeLivroExistente (int x){
-        for(int i = 0; i < proximoIndiceLivreParaIten; i++){
-            if (livros.get(i).GetCodigo() == x)
-                return true;
-        }
-        return false;
-    }*/
     
     //+++++  +++++  +++++//
     
